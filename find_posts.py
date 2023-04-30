@@ -72,13 +72,18 @@ def add_user_posts(server, access_token, followings, know_followings, all_known_
                 count = 0
                 failed = 0
                 for post in posts:
-                    if post['reblog'] == None and post['url'] != None and post['url'] not in seen_urls:
-                        added = add_post_with_context(post, server, access_token, seen_urls)
-                        if added is True:
-                            seen_urls.add(post['url'])
-                            count += 1
-                        else:
-                            failed += 1
+                    try:
+                        if post['reblog'] == None and post['url'] != None and post['url'] not in seen_urls:
+                            added = add_post_with_context(post, server, access_token, seen_urls)
+                            if added is True:
+                                seen_urls.add(post['url'])
+                                count += 1
+                            else:
+                                failed += 1
+                    except Exception as ex:
+                        log(f"Error adding post {post}")
+                        raise
+                        
                 log(f"Added {count} posts for user {user['acct']} with {failed} errors")
                 if failed == 0:
                     know_followings.add(user['acct'])
