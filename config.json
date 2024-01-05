@@ -1,9 +1,9 @@
 {
   "server": "ck.villisek.fr",
-  "home-timeline-length": 200,
-  "max-followings": 120,
-  "max-bookmarks": 120,
-  "max-favourites": 120,
-  "max-followers": 120,
+  "home-timeline-length": 40,
+  "max-followings": 40,
+  "max-bookmarks": 40,
+  "max-favourites": 40,
+  "max-followers": 40,
   "from-notifications": 1
 }
