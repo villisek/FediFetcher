@@ -30,7 +30,7 @@ argparser.add_argument('--max-favourites', required = False, type=int, default=0
 argparser.add_argument('--from-notifications', required = False, type=int, default=0, help="Backfill accounts of anyone appearing in your notifications, during the last hours")
 argparser.add_argument('--remember-users-for-hours', required=False, type=int, default=24*7, help="How long to remember users that you aren't following for, before trying to backfill them again.")
 argparser.add_argument('--remember-hosts-for-days', required=False, type=int, default=30, help="How long to remember host info for, before checking again.")
-argparser.add_argument('--http-timeout', required = False, type=int, default=5, help="The timeout for any HTTP requests to your own, or other instances.")
+argparser.add_argument('--http-timeout', required = False, type=int, default=60, help="The timeout for any HTTP requests to your own, or other instances.")
 argparser.add_argument('--backfill-with-context', required = False, type=int, default=1, help="If enabled, we'll fetch remote replies when backfilling profiles. Set to `0` to disable.")
 argparser.add_argument('--backfill-mentioned-users', required = False, type=int, default=1, help="If enabled, we'll backfill any mentioned users when fetching remote replies to timeline posts. Set to `0` to disable.")
 argparser.add_argument('--lock-hours', required = False, type=int, default=24, help="The lock timeout in hours.")
@@ -681,7 +681,7 @@ def parse_lemmy_profile_url(url):
 def get_redirect_url(url):
     """get the URL given URL redirects to"""
     try:
-        resp = requests.head(url, allow_redirects=False, timeout=5,headers={
+        resp = requests.head(url, allow_redirects=False, timeout=60,headers={
             'User-Agent': 'FediFetcher (https://go.thms.uk/mgr)'
         })
     except Exception as ex:
